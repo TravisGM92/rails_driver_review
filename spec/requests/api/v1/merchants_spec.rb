@@ -7,8 +7,11 @@ RSpec.describe 'Merchants' do
   end
   describe 'REST endpoints' do
     it 'can get all Merchants' do
-      response = conn('/api/v1/merchants').get
+      create_list(:merchant, 5)
 
+      response = conn('/api/v1/merchants').get
+      expect(response).to be_successful
+      require "pry"; binding.pry
     end
   end
 end
