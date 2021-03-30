@@ -6,7 +6,7 @@ module Api
       end
 
       def show
-        render json: MerchantSerializer.new(Merchant.where(id: params[:id]))
+        render json: MerchantSerializer.new(Merchant.find(id: params[:id]))
       end
     end
   end
