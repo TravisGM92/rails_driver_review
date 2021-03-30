@@ -38,3 +38,18 @@ RSpec.describe 'Merchants' do
     end
   end
 end
+
+RSpec.describe 'Merchant' do
+  describe 'REST endpoints' do
+    it '/api/v1/merchants/id' do
+      merchant = create(:merchant)
+      get "/api/v1/merchants/#{merchant.id}"
+      expect(response.status).to eq(200)
+      result = JSON.parse(response.body, symbolize_names: true)
+      expect(result.keys).to eq([:data])
+      expect(result[:data]).to be_an(Array)
+      expect(result[:data][0].keys).to eq(%i(id type attributes))
+      expect(result[:data][0][:attributes].keys).to eq(%i(id name created_at updated_at))
+    end
+  end
+end
